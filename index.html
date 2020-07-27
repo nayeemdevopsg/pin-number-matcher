@@ -60,7 +60,6 @@
     <script>
 //Developed By: MD NAYEEM HOSSAIN.
 
-
 //Generate Pin
         document.getElementById('getPin').addEventListener('click', function(){
                 var pinNew = Math.random() * 999 + 1000;
@@ -70,26 +69,26 @@
                 document.getElementById('pinNumber').value = finalPin;
 
         })
+        
 //Input Value in screen to match and set limit.
 var store = [];
         function typeValue(insertNum){
 
             if( document.getElementById('matchPin').value.length < 4){
                 var screenNum = document.getElementById('matchPin').value;
-           var newInsert = screenNum + insertNum;
-           var storeNum = parseFloat(newInsert);
-           store.push(storeNum);
-           console.log(store);
+                var newInsert = screenNum + insertNum;
+                var storeNum = parseFloat(newInsert);
+                  store.push(storeNum);
+                  console.log(store);
 
-            var last = store.slice(-1)[0];
-            document.getElementById('matchPin').value = last;   
+                var last = store.slice(-1)[0];
+                document.getElementById('matchPin').value = last;   
         }
         else{
-            window.alert("Pin cannot be more than 4 Numbers"); 
+                window.alert("Pin cannot be more than 4 Numbers"); 
         }
             }
         
-
            //eraser 
            function erase(){
                var lastDel = store.pop(-1);
@@ -104,15 +103,15 @@ var store = [];
 
            //Reset
            function reset(){
-            var store = [];
-            document.getElementById('matchPin').value = "";
-            document.getElementById('matched').style.display = "none";
-            document.getElementById('notMatch').style.display = "none";
-            document.getElementById('pinNumber').value = "";
-            document.getElementById('chance').style.display = "none";
+                 store.length = 0;
+                 document.getElementById('matchPin').value = "";
+                 document.getElementById('matched').style.display = "none";
+                 document.getElementById('notMatch').style.display = "none";
+                 document.getElementById('pinNumber').value = "";
+                 document.getElementById('chance').style.display = "block";
+                 document.getElementById('ch-value').innerText = 3;
            }
           
-
           //Submit for Matching
           function matchPin(){
             document.getElementById('matched').style.display = "none";
@@ -147,18 +146,7 @@ var store = [];
                     document.getElementById('ch-value').innerText = finalChance;
                 }
               }
-          }
-
-           
-
-       
-
-
-
-
-
-
-
+          }      
     </script>
 </body>
 </html>
