@@ -12,38 +12,38 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="pin-generator half-width">
-                    <input class="form-control" type="text">
-                    <button class="generate-btn">Generate Pin</button>
+                    <input id="pinNumber" class="form-control" style="text-align: right;" type="text">
+                    <button id="getPin" class="generate-btn">Generate Pin</button>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="input-section half-width">
-                    <input class="form-control" type="text">
+                    <input id="matchPin" class="form-control" style="text-align: right;" type="text">
                     <div class="numbers">
                         <div class="calc-body">
                             <div class="calc-button-row">
-                              <div class="button">7</div>
-                              <div class="button">8</div>
-                              <div class="button">9</div>
+                              <div class="button" onclick="typeValue(7)">7</div>
+                              <div class="button" onclick="typeValue(8)">8</div>
+                              <div class="button" onclick="typeValue(9)">9</div>
                             </div>
                             <div class="calc-button-row">
-                              <div class="button">4</div>
-                              <div class="button">5</div>
-                              <div class="button">6</div>
+                              <div class="button" onclick="typeValue(4)">4</div>
+                              <div class="button" onclick="typeValue(5)">5</div>
+                              <div class="button" onclick="typeValue(6)">6</div>
                             </div>
                             <div class="calc-button-row">
-                              <div class="button">1</div>
-                              <div class="button">2</div>
-                              <div class="button">3</div>
+                              <div class="button" onclick="typeValue(1)">1</div>
+                              <div class="button" onclick="typeValue(2)">2</div>
+                              <div class="button" onclick="typeValue(3)">3</div>
                             </div>
                             <div class="calc-button-row">
-                                <div class="button"><</div>
-                                <div class="button">0</div>
-                                <div class="button">C</div>
+                                <div class="button" onclick="erase()"><</div>
+                                <div class="button" onclick="typeValue(0)">0</div>
+                                <div class="button" onclick="reset()">C</div>
                             </div>
                             <div>
-                                <button type="submit" class="submit-btn">Submit</button>
-                                <p class="action-left">3 try left</p>
+                                <button id= "matchValues" type="submit" class="submit-btn" onclick="matchPin()">Submit</button>
+                                <p id="chance" class="action-left"><span id="ch-value">3</span> try left</p>
                             </div>
                     </div>
                 </div>
@@ -54,5 +54,111 @@
             <p id="matched" class="notify">✅ Pin Matched... Secret door is opening for you</p>
         </div>
     </div>
+
+
+    <!--javascripts-->
+    <script>
+//Developed By: MD NAYEEM HOSSAIN.
+
+
+//Generate Pin
+        document.getElementById('getPin').addEventListener('click', function(){
+                var pinNew = Math.random() * 999 + 1000;
+                var finalPin = pinNew.toFixed(0);
+                console.log(finalPin);
+
+                document.getElementById('pinNumber').value = finalPin;
+
+        })
+//Input Value in screen to match and set limit.
+var store = [];
+        function typeValue(insertNum){
+
+            if( document.getElementById('matchPin').value.length < 4){
+                var screenNum = document.getElementById('matchPin').value;
+           var newInsert = screenNum + insertNum;
+           var storeNum = parseFloat(newInsert);
+           store.push(storeNum);
+           console.log(store);
+
+            var last = store.slice(-1)[0];
+            document.getElementById('matchPin').value = last;   
+        }
+        else{
+            window.alert("Pin cannot be more than 4 Numbers"); 
+        }
+            }
+        
+
+           //eraser 
+           function erase(){
+               var lastDel = store.pop(-1);
+               document.getElementById('matchPin').value = lastDel;
+               if(document.getElementById('matchPin').value == "undefined"){
+                document.getElementById('matchPin').value = "";
+               }
+               else{
+                document.getElementById('matchPin').value = lastDel;
+               }
+           }
+
+           //Reset
+           function reset(){
+            var store = [];
+            document.getElementById('matchPin').value = "";
+            document.getElementById('matched').style.display = "none";
+            document.getElementById('notMatch').style.display = "none";
+            document.getElementById('pinNumber').value = "";
+            document.getElementById('chance').style.display = "none";
+           }
+          
+
+          //Submit for Matching
+          function matchPin(){
+            document.getElementById('matched').style.display = "none";
+            document.getElementById('notMatch').style.display = "none";
+              var input1 = document.getElementById('matchPin').value;
+              var userPin = parseFloat(input1);
+              console.log(userPin);
+              var gPin1 = document.getElementById('pinNumber').value;
+              var assimilatePin = parseFloat(gPin1);
+              console.log(assimilatePin);
+
+              if( userPin == assimilatePin){
+                  document.getElementById('matched').style.display = "block";
+                  document.getElementById('chance').style.display = "none";
+              }
+              else{
+                document.getElementById('notMatch').style.display = "block";
+                var chValue = document.getElementById('ch-value').innerText;
+                var fChValue = parseFloat(chValue);
+                console.log(fChValue);
+                var countValue = 1;
+                var finalChance = fChValue - countValue;
+                console.log(finalChance);
+
+                if( finalChance  == 0){
+                    document.getElementById('chance').style.display = "block";
+                    document.getElementById('ch-value').innerText = finalChance;
+                    document.getElementById('matchValues').disabled = true;
+                }
+                else if(finalChance == 2 || finalChance == 1){
+                    document.getElementById('chance').style.display = "block";
+                    document.getElementById('ch-value').innerText = finalChance;
+                }
+              }
+          }
+
+           
+
+       
+
+
+
+
+
+
+
+    </script>
 </body>
 </html>
