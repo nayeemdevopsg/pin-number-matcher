@@ -91,7 +91,7 @@ var store = [];
         
            //eraser 
            function erase(){
-               var lastDel = store.pop(-1);
+               var lastDel = store.pop();
                document.getElementById('matchPin').value = lastDel;
                if(document.getElementById('matchPin').value == "undefined"){
                 document.getElementById('matchPin').value = "";
