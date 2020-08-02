@@ -110,7 +110,7 @@ var store = [];
                  document.getElementById('pinNumber').value = "";
                  document.getElementById('chance').style.display = "block";
                  document.getElementById('ch-value').innerText = 3;
-                 document.getElementById('matchValues').style.display = "block";
+                 document.getElementById('matchValues').disabled = false;
            }
           
           //Submit for Matching
@@ -140,7 +140,7 @@ var store = [];
                 if( finalChance  == 0){
                     document.getElementById('chance').style.display = "block";
                     document.getElementById('ch-value').innerText = finalChance;
-                    document.getElementById('matchValues').style.display = "none";
+                    document.getElementById('matchValues').disabled = true;
                 }
                 else if(finalChance == 2 || finalChance == 1){
                     document.getElementById('chance').style.display = "block";
